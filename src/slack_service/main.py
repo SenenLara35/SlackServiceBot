@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from .schemas import SlackMessageRequest
 from .slack_client import send_message_to_slack
+import os
 
 app = FastAPI(
     title="Servicio FastAPI Slack",
