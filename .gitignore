@@ -3,3 +3,10 @@ __pycache__
 .env
 .venv
 dist/
+clave-slack
+clave-slack.pub
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
