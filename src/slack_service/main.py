@@ -7,6 +7,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# --- BLOQUE NUEVO PARA LA WEB ---
+# Calculamos la ruta absoluta a la carpeta static para que no falle en Linux
+static_path = os.path.join(os.path.dirname(__file__), "static")
+
+# Montamos la web en la raíz "/"
+app.mount("/", StaticFiles(directory=static_path, html=True), name="static")
+# --------------------------------
+
 @app.get("/health")
 def health_check():
     """Endpoint para monitoreo."""
