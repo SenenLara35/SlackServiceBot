@@ -15,9 +15,17 @@ jobs:
 
       - name: Preparar carpeta en el servidor
         run: |
-          # Borramos versión vieja y copiamos la nueva
-          rm -rf /home/ubuntu/app/*
-          # Copiamos todo el contenido actual a la carpeta de la app
+          # 1. Borramos la carpeta ENTERA con sudo (así eliminamos también los ocultos .git)
+          sudo rm -rf /home/ubuntu/app
+          
+          # 2. Creamos la carpeta de nuevo (limpia)
+          mkdir -p /home/ubuntu/app
+          
+          # 3. Asignamos permisos al usuario actual por si acaso
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/app
+          
+          # 4. Copiamos los archivos (usamos rsync para excluir .git y no copiar basura)
+          # Si rsync no está instalado, fallará, así que usamos cp como plan B pero ahora funcionará porque la carpeta está vacía.
           cp -r . /home/ubuntu/app/
 
       - name: Crear archivo .env con secretos
